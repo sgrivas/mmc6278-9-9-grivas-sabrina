@@ -50,7 +50,7 @@ const renderedCity = ({
     <h2>${name}, ${country}</h2>
     <a href=https://www.google.com/maps/search/?api=1&query=${lat},${lon} target="_blank">Click to view map</a>
     <img src="https://openweathermap.org/img/wn/${icon}@2x.png">
-    <p>${description}</p>
+    <p style="text-transform: capitalize;">${description}</p>
     <p>Current: ${temp}° F<p/>
     <p>Feels like: ${feels_like}° F</p>
     <p>Last updated: ${timeString}</p>
