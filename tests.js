@@ -171,9 +171,9 @@ function runTests() {
     const getWeatherHTML = () =>
       document.getElementById('weather-app').innerHTML.toLowerCase()
 
-    async function stubWeatherFetch(returnJSON, query) {
+    async function stubWeatherFetch(returnJSON, query, status) {
       const fetchStub = sinon.stub(window, 'fetch')
-        .resolves({ json: sinon.stub().resolves(returnJSON) })
+        .resolves({ json: sinon.stub().resolves(returnJSON), status: status || 200 })
       document.querySelector('input').value = query
       document.querySelector('#weather-app form button').click()
       expect(fetchStub.called).to.be.true
@@ -200,7 +200,7 @@ function runTests() {
 
     it('should display "Location Not Found" if no location is found', async function () {
       sinon.restore()
-      await stubWeatherFetch({ data: { cod: 404 } })
+      await stubWeatherFetch({ data: { cod: 404 } }, 'askjdnfks', 404)
       expect(getWeatherHTML().includes('location not found')).to.be.true
     })
     it('should clear the input value after searching for weather data', () => {
